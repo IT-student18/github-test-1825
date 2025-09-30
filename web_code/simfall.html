@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Falling</title>
+<style type="text/css" media="all">
+html {
+    background-color: dimgrey;
+    width: 100%;
+    height: 100%;
+}
+body{
+    width: 90vw;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    position: relative;
+    padding: 0;
+    background-color: darkgray;
+}
+body *:not(hr) {
+    width: fit-content;
+    margin-inline: auto;
+    background-color: gray;
+}
+
+body span {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0px;
+}
+
+#fuck hr {
+    background-color:darkred;
+    min-height: 1em;
+    border: none;
+    width:100%;
+    margin-block: 0px;
+    height: 5vh;
+}
+
+#fuck {
+    display: block;
+    z-index:0;
+    font-size:5vh;
+}
+#char {
+    display: inline-block;
+    background-color:green;
+    margin-block: 0px 0px;
+    padding:0px;
+    z-index: 1;
+    font-size: 10vh;
+    height: fit-content;
+}
+</style>
+</head>
+<body>
+    <h1 id="mb">NoneYet</h1>
+    <span>
+        <h1 id="char">@</h1>
+     <div id ="fuck">
+         Text
+         <hr>
+         <hr>
+         <hr>
+         <hr>
+         more text
+         <hr>
+         <hr>
+         <hr>
+         And more
+     </div>
+    </span>
+<script>
+    let f = document.getElementById("fuck");
+    let a = window.innerWidth;
+    setInterval(()=>{f.style.transform = `translateX(${a}px)`; a-=1;document.getElementById('mb').innerHTML = a.toString();}, 10);
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Just-an-experiment</title>
+<style type="text/css" media="all">
+html {
+    width: 100%;
+    background-color: dimgrey;
+}
+body {
+    width: 90vw;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    margin:0;
+    position: relative;
+    padding: 0;
+    text-wrap: wrap;
+    overflow: hidden;
+body * {
+    width: fit-content;
+    margin-inline: auto;
+}
+}
+</style>
+</head>
+<body>
+    
+<h2 id="o1">noneYet</h2>
+<div id="cb" style="width:50%; min-height:fit-content; aspect-ratio:1/1; padding-block: 10px; margin:auto; background-color: IndianRed; position: absolute;left: 50vw; top:20px;display: flex; justify-content: center; align-items: center;
+ "><a href="#" id="asd">asd</a></div>
+<script>
+const tb = document.getElementById('cb');
+const out1 = document.getElementById('o1');
+const ad = document.getElementById('asd');
+const isAndroid = /(android)/i.test(navigator.userAgent);
+let a = Array(2);
+let divFollow = true
+document.addEventListener("touchmove", (e)=>{
+    if (isAndroid) {
+    a[0] = e.touches[0].pageX;
+    a[1] = e.touches[0].pageY;
+    out1.innerHTML = `Page: (${a[0]},${a[1]})`;
+    } else {
+        a[0] = e.pageX;
+        a[1] = e.pageY;
+         out1.innerHTML = `Page: (${a[0]},${a[1]})`;
+    }
+        
+    });
+/*a[0] = tb.style.left;
+a[1] = tb.style.top;*/
+function updatePos(){
+    if (document.activeElement === ad) {divFollow = !divFollow; ad.blur();}
+    if (divFollow){
+    tb.style.left = a[0];
+    tb.style.top = a[1];}
+}
+
+function spawnChar()
+{
+    
+}
+
+setInterval(updatePos, 10);
+//tb.innerHTML = a.join('');
+</script>
+</body>
+</html>

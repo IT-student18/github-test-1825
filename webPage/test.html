@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+<head class="mes">
+    <style>
+        .mes {width: 100vw;
+            height: 100%;
+            display: flex;
+            margin: auto;
+            padding: auto;
+            position: relative;
+            flex-direction: column;
+            background-color: dimgray;
+        }
+        .mes * {
+            margin:auto;
+            width: fit-content;
+        }
+        #bl {
+            position: absolute;
+            left: 0px;
+            width: 100%;
+            border: none;
+            height: 10px;
+            background-color: rgb(0,0,0);
+        }
+        #cb {
+            border: 2px solid black;
+            height: fit-content;
+            width: 50vw;
+            padding-block: 50px;
+            position: relative;
+           
+        }
+        #cb * {
+            border: 2px solid darkgray;
+            margin-inline: 0px auto;
+            width: fit-content;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <title>Just_an_experiment</title>
+</head>
+<body class="mes">
+    <!-- <div style="position: absolute; z-index: -2; background-color: brown; width: 50vw; height:863px;"></div> -->
+    <h1>The_experiment_has_already_started...</h1>
+    <div id="cb">
+    <h1 id="outp"></h1>
+    <h1 id="outp2"></h1>
+    </div>
+    <p style="display: inline-block; font-size: 110px; position: absolute; margin: 0px; padding: 0px;" id="piy">☺</p>
+    <hr id="bl">
+    <script>
+        let d = 0;
+        const smiley = [0,0,0,0];//x, y, x.aceleration, y.aceleration;
+        const tb = document.getElementById('cb');
+        // const cords = tb.querySelector('h1');
+        const cords = document.getElementById('outp');
+        const smlNumbers = document.getElementById('outp2');
+        const tpe = document.getElementById('piy');
+        const hr = document.getElementById('bl');
+         Object.assign(tpe.style, {
+            position: 'absolute',
+            top: '0px',
+            left: '0px'
+        })
+        hr.style.top = 853+ 'px';
+        smiley[0] = parseFloat(tpe.style.left);
+        smiley[1] = parseFloat(tpe.style.top);
+        document.addEventListener('mousemove', (e) => {
+            cords.innerHTML  = `Page: (${e.pageX}, ${e.pageY})`;
+        })
+
+        function* generateSequence() {
+            yield '-';
+            yield '\\';
+            yield '|';
+            yield '/';
+            yield '-'; 
+            yield '\\';
+            yield '|';
+            yield '/';
+            yield* generateSequence(); // Recursively yield all values again
+        }
+
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        tpe.addEventListener("mousedown", (e) => {
+        isDragging = true;
+
+        // Calculate the offset between mouse and element's top-left
+        const rect = tpe.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
+
+        // Prevent text selection while dragging
+        e.preventDefault();
+        });
+
+        document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+
+        // Move the element to new position (subtract offsets to keep cursor aligned)
+        tpe.style.left = `${e.clientX - offsetX}px`;
+        tpe.style.top = `${e.clientY - offsetY}px`;
+        });
+
+        document.addEventListener("mouseup", () => {
+        isDragging = false;
+        });   
+
+        const generator = generateSequence();
+        const intervalId = setInterval(() => {
+            smlNumbers.innerHTML = smiley.join(', ');
+            //console.clear();
+            //console.log(generator.next().value);
+            if ((smiley[1] + tpe.offsetHeight - 20) > (parseFloat(hr.style.top) - smiley[3])) smiley[3] = -20;
+            smiley[3]++;
+            smiley[1] += smiley[3];
+            if (!isDragging) tpe.style.top = smiley[1] + 'px';
+            
+        }, 10);
+    </script>
+</body>
+
+</html>

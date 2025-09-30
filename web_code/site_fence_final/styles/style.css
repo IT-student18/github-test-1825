@@ -1,0 +1,96 @@
+body {
+	background:url('../content/un_ornament_francais.png');
+	display:flex;
+	background-color: none;
+	flex-direction:column;
+	text-align: center;
+	background-size: cover;
+    	background-repeat: repeat; 
+}
+.tittle_and_nav {
+		background-color:dimgrey;
+}
+.nav {	display: flex;
+	flex-wrap: wrap;
+	height:400px;
+	width: auto;
+	position: relative;
+	margin: 110px auto 30px auto;
+	/*align-self: center;
+	width: 800px;
+	margin: 10px auto 20px auto;
+	justify-content: space-between;*/
+}
+.nav a {
+  	position: relative;
+  	width: fit-content; /* shrink to content */
+  	height: fit-content;
+  	padding: 0;
+  	border: none;
+  	background: none;
+	text-align:center;
+  	z-index: 2;
+}
+
+
+.nav a .overlay-text {
+  	z-index: 100;
+	margin: 20px;
+  	pointer-events: auto;
+  	user-select: none;
+  	white-space: nowrap;
+	font-size:34px;
+	letter-spacing:80px;
+  	color: rgba(255, 255, 255, 0);
+	position: absolute;
+	left: 4vw;
+	top: 8vw;
+}
+
+.nav a img {
+  	position: absolute; /* take image out of flow */
+  	top: 0;
+  	left: 0;
+  	transform: scale(0.8);
+  	filter: drop-shadow(5px 5px 10px rgba(255, 0, 187, 0.7));
+  	pointer-events: none;
+  	z-index: 1;
+}
+
+.nav a .overlay-text:hover ~ #songs,
+#songs:hover  {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.center_line_b
+{
+	display:flex;
+	align-self: center;
+	width: 1100px;
+	height:fit-content;
+	background-color: #343434;
+}
+.center_line_in
+{
+	display:flex;
+	align-self: center;
+	flex-direction:column;
+	width: 1000px;
+	margin: 0px auto 0px auto;
+	background-color: gray;
+}
+
+.rights_info {
+	border:3px solid aqua;
+	background-color:darkred;
+	color:blue;
+	font-style:italic;
+	align-self:center;
+	width: 800px;
+}
+
+.footer {
+	display:flex;
+	justify-content: center;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<p id="1">This is a paragraph.</p>
+
+<script>
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms));
+    const ch = ".";
+    let f = Array.from({ length: 3 }, () => [...ch.repeat(3)]);
+    // let f = [...(ch.repeat(5))];
+    let p = document.getElementById("1"); 
+    let h = 0, h2=0, s = "";
+    async function NoName() {
+        await sleep(1000);
+        // p.innerHTML=f.join('');
+        while (true) {
+        while (h2<=3) {
+            s = f.map(row => row.join('')).join('<br>') + '<br>' + [h, h2].toString();
+            p.innerHTML = s;
+            f.forEach((element, index) => {
+            f[index] = f[index].fill(".");
+            });
+            f[h2][h] = "@";
+            if (d >0) {
+            if (h<2) {h+=d} else {
+                if (h===2) h = 0;
+                h2+=d;};} else {
+                    if (h>0) {h+=d} else {
+                if (h===0) h = 3;
+                h2-=1;};
+                }
+            await sleep(1000);
+            }
+        
+        }
+    }
+
+    NoName();
+</script>
+</body>
+</html>

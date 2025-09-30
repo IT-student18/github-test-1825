@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html>
+<body style="background: white; padding: 20px;">
+  <svg width="200" height="100" style="border: 1px solid #ddd;">
+    <rect x="10" y="10" width="80" height="80" fill="#008B8B" />
+  </svg>
+  <p style="color: #008B8B;">This text should be same color.</p>
+</body>
+</html>   
+<!--
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Measuring angle</title>
+  <style type="text/css" media="all">
+      html {
+          width: 100%;
+          height: 100%;
+          background-color: dimgrey;
+      }
+      body {
+          width: 90vw;
+          height: 100%;
+          background-color: darkgray;
+          position:relative;
+          margin: auto;
+      }
+      body * {
+          width:fit-content;
+          margin-inline: auto;
+      }
+  </style>
+</head>
+<svg width="200" height="100" style="color: darkcyan;">
+  <rect x="10" y="10" width="80" height="80" fill="darkcyan" />
+</svg>   
+<body>
+  <script>
+   
+  </script>
+</body>
+</html>   
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Device Detection</title>
+</head>
+<body>
+  <script>
+    // Detect if the user is on an Android device
+    const isAndroid = /(android)/i.test(navigator.userAgent);    
+
+    // Create a div element
+    const div = document.createElement('div');
+    div.style.width = '100px';
+    div.style.height = '100px';
+
+    // Set color based on device
+    if (isAndroid) {
+      div.style.backgroundColor = 'green'; // Android → green
+    } else {
+      div.style.backgroundColor = 'blue';  // PC or other → blue
+    }
+
+    // Append the div to the body
+    document.body.appendChild(div);
+  </script>
+</body>
+</html>   
+
+-----------
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collision Detection</title>
+    <style type="text/css" media="all">
+        body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+#container {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.element {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+#A {
+    background-color: lightblue;
+}
+
+.B {
+    background-color: lightcoral;
+}
+    </style>
+</head>
+<body>
+    
+    <div id="container">
+        <div id="A" class="element">A</div>
+        <div class="B element">B</div>
+        <div class="B element">B</div>
+        <div class="B element">B</div>
+        <div class="B element">B</div>
+        <div class="B element">B</div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+const A = document.getElementById('A');
+const BElements = document.querySelectorAll('.B');
+
+let APosition = A.getBoundingClientRect();
+let stopMoving = false;
+
+// Function to move B elements
+function moveBElements() {
+    if (stopMoving) return;
+    console.log('working!');
+    BElements.forEach((B) => {
+        let BPosition = B.getBoundingClientRect();
+        
+        // Move B to the left
+        B.style.left = (parseInt(B.style.left || container.offsetWidth) - 2) + 'px';
+
+        // Check for collision
+        if (checkCollision(APosition, A.offsetWidth, A.offsetHeight, BPosition, B.offsetWidth, B.offsetHeight)) {
+            stopMoving = true; // Stop moving when collision occurs
+            changeColor(B);
+        }
+    });
+
+    requestAnimationFrame(moveBElements);
+}
+
+// Function to check collision
+function checkCollision(aPos, aWidth, aHeight, bPos, bWidth, bHeight) {
+    return !(bPos.right < aPos.left || 
+             bPos.left > aPos.right || 
+             bPos.bottom < aPos.top || 
+             bPos.top > aPos.bottom);
+}
+
+// Function to change the color of B element
+function changeColor(B) {
+    B.style.transition = 'background-color 0.2s';
+    B.style.backgroundColor = 'yellow'; // Change to any color you want
+}
+
+// Function to update A's position dynamically
+function updateAPosition() {
+    APosition = A.getBoundingClientRect();
+}
+
+// Event listener to update position of A on mouse move
+document.addEventListener('mousemove', (event) => {
+    A.style.top = event.clientY - 25 + 'px'; // Center the A element on mouse
+    A.style.left = event.clientX - 25 + 'px';
+    updateAPosition();
+});
+
+// Start moving B elements
+setInterval(moveBElements(), 10);
+
+    </script>
+</body>
+</html>
+-->

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<style>
+html {	
+    	width:100%;
+    	height:100%;
+	    background-color: dimgrey;
+}
+body { 
+    display:flex;
+    flex-flow: column nowrap;
+    width: 80vw;
+    height:100%;
+    margin: auto;
+    position: relative;
+    padding: 1em;
+    text-wrap: wrap;
+}
+body *:not(.r) {
+    width:fit-content;
+    align-self: center;
+    }
+</style>
+</head>
+
+<body class="mt">
+<input type="text" id="fts" placeholder="Enter data">
+<button id="killme">
+    FUCHTHISSHIT
+</button>
+<svg width="300" height="100" xmlns="http://www.w3.org/2000/svg">
+   <polyline
+    points="10,10 50,30 90,20 130,80 180,40"
+    fill="none"
+    stroke="green"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
+<script type="module">
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", "300");
+    svg.setAttribute("height", "200");
+    svg.style.border = 'solid 2px black';
+    document.body.appendChild(svg);
+
+    function fuck(x, y, w, h) {
+    const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    const input = document.getElementById('fts').value;
+    let a = input.split(',');
+    const attrs = {
+    x: 10,
+    y: 10,
+    width: 200,
+    height: 120,
+    class: 'r'
+    };
+    let i = 0;
+    for (const key of Object.keys(attrs)) {
+        if (key !== 'class') {
+        attrs[key] = a[i];
+        i++;
+        }
+    }
+    for (const [key, value] of Object.entries(attrs)) {
+        rect.setAttribute(key, value);
+        }
+    svg.appendChild(rect);
+    }
+    
+    document.getElementById('killme').onclick = fuck;
+</script>
+
+</body>
+</html>

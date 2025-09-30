@@ -1,0 +1,69 @@
+<!DOCTYPE>
+<html>
+<body>
+<style>
+#a {  
+	color:Yellow;
+	font-size: 60px;
+	position: absolute;
+	animation: rotate 1s infinite;
+	animation-fill-mode: none;
+	animation-delay:-5s;
+	
+}
+#b {  
+	color:Red;
+	font-size: 60px;
+	position: relative;
+	animation: mymove 5s infinite;
+	animation-direction: alternate;
+	animation-fill-mode: none;
+	animation-timing-function: linear;	
+}
+#e {
+	color:Azure;
+	font-size: 120px;
+	position: absolute;
+	animation: pFadeIn 3s infinite ease-in;
+	animation-direction: alternate;
+	}
+@keyframes pFadeIn {
+        0% {
+            opacity: 1;
+        }
+        30% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes mymove {
+  from {left:0%;
+}
+  to {left:77%;
+}
+}
+</style>
+<div style="padding-top:300px;">
+<p id="a"><b>AAAAAAAAAAA<b></p>
+</div>
+
+<div style="padding-top:350px;">
+<p id="b"><b>BBBBBBBBBBB<b></p>
+</div>
+
+<div style="padding-top:0px;">
+<p id="e"><b>EEEEEEEEEEE<b></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+body {
+  display: grid;
+  width: 100%;
+  margin: 0;
+}
+
+.line-out {
+  display: flex;
+  width: 800px;
+  justify-self: center;
+  background-color: dimgray;
+  padding-inline: 5%;
+}
+
+.line-in {
+  display: flex;
+  width: 100%;
+  background-color: gray;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+.nav-n-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: darkred;
+}
+
+.button {
+  display: inline-block;
+  background-image: url("https://avatars.dzeninfra.ru/get-zen_doc/271828/pub_6576089c993e2577bcfd2ff4_65760a674ad6bc380e4a04da/scale_1200");
+  background-size: 100%;
+  background-position: 30% 30%;
+  padding: 20px 30px 20px 30px;
+}
+
+.button a {
+  display: block;
+  width: fit-content;
+  font-size: 36px;
+  text-decoration: none;
+  color: brown;
+  cursor: pointer;
+}
+
+.songs-box-out {
+  width: 100%;
+  height: max-content;
+  display: grid;
+  margin-top: 20px;
+  place-items: center;
+  border: 10px outset #c81414;
+  box-sizing: border-box;
+  padding: 15px 10px 20px 10px;
+}
+
+.songs-box-out h2 {
+  color: Crimson;
+  font-family: "Lucida Bright", Georgia, serif;
+  text-shadow: 3px 3px 3px black;
+  margin: 0px auto 0px;
+}
+
+.songs-box-out h3 {
+  color: Indianred;
+  font-family: "Helvetica", serif;
+  margin-bottom: 0px;
+  text-shadow: 3px 3px 3px black;
+  margin-top: 10px;
+}
+
+/*.songs-box-in {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 10px;
+  margin: 10px auto 10px;
+  border: 10px solid Orange;
+  box-sizing: border-box;
+}
+*/
+.grid-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* 2 equal columns */
+  column-gap: 3px;
+  /* Simulates borders between cells */
+  background-color: #000;
+  /* Matches gap color for border effect */
+  border: 2px solid #000;
+  /* Optional outer border */
+  font-family: sans-serif;
+  width: fit-content;
+  height: fit-content;
+}
+
+.grid-table div {
+  display: flex;
+  flex-direction: row;
+  background-color: dimgrey;
+  padding: 20px;
+}
+
+.grid-table div h4 {
+  color: brown;
+  font-family: "Helvetica", serif;
+  text-shadow: 3px 0px 0px black;
+  margin-top: 10px;
+}
+
+.grid-table * a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+}

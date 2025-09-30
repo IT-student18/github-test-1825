@@ -1,0 +1,155 @@
+using System.Threading;
+using System;
+using System.Collections.Generic;
+using static System.Console;
+using System.Security.Cryptography;
+
+namespace ConsoleApp12
+{
+    class Program
+    {
+        //static void Main(string[] args)
+        //{
+
+        //    int n = rand.Next(5,10);
+        //    int m = rand.Next(5, 10);
+        //    int[,] mas = new int[n, m];
+        //    for (int i = 0; i < n; i++)
+        //    {
+        //        for (int j = 0; j < m; j++)
+        //        {
+        //            mas[i, j] = rand.Next(50);
+        //            Write($"{mas[i,j],2} ");
+        //        }
+        //        WriteLine();
+        //    }
+        //    WriteLine($"Сумма= {mas.Cast<int>().Where(s=>s>10).Sum()}");
+        //    WriteLine($"Макс= {mas.Cast<int>().Max()}");
+        //    WriteLine($"Среднее= {mas.Cast<int>().Average():f3}");
+        //    ReadKey();
+        //}
+
+        //static void N()
+        //{
+        //    System.Drawing.Rectangle h = new Rectangle(4, 5, 4 ,4);
+        //    System.Drawing.
+        //}
+
+        static int[,] GetRandomArrayOne(int m, int n, int a, int b)
+        {
+            int[,] u = new int[m, n];
+            int[] c = new int[m];
+            int[] d = new int[n];
+            c = Enumerable.Range(0, m).Select(x => Random.Shared.Next(a, b)).ToArray()
+            return;
+        }
+
+        static int[] Input()
+        {
+        int m = 20, n = 20;
+        int[] a = GetRandomArrayOne(n, 0, 10);
+        return a;
+        }
+
+        //static List<> Count(int[] a)
+        //{
+        //    int k = 0;
+        //    int h = 0;
+        //    for (int i = 0; i < a.Length - 1; i++)
+        //    {
+        //        if (a[i] == a[i + 1])
+        //        { 
+        //        ++k;
+        //        h = i;
+        //        }  
+        //    }
+        //    return (k,h);
+
+        //}
+
+        static void Main()
+        {
+
+
+            //int index = 0;
+            //int[] a = Input();
+            //foreach (int n in a)
+            //{
+            //    Write(n);
+            //    if 
+            //    Write(" ");
+            //    index++;
+            //}
+            //WriteLine();
+            //WriteLine($"k={Count(a)}");
+            //ReadKey();
+
+            //Write("массив:");
+            //int[] m = { };
+            //List<int> mm = new List<int>();
+            //foreach (int n in GetRandomArrayOne(10, 0, 10))
+            //{
+            //    Write(n);
+            //    mm.Add(n);
+            //    Write(" ");
+            //}
+            //WriteLine();
+            //m = mm.ToArray();
+            //Write($"Ср значение:{m.Cast<int>().Average():f0}");
+
+            //            double A = 0, B = 0;
+            //            const int width = 120;
+            //            const int height = 60;
+            //            int k = 0;
+            //            int[,] framebuffer = new int[width, height];
+            //            double[,] zBuffer = new double[width, height];
+            //            while (true)
+            //            {
+            //                Array.Fill(framebuffer, 0); 
+            //                Array.Fill(zBuffer, double.MinValue); 
+            //                for (int i = 0; i  628; i += 2) 
+            //                {
+            //                    for (int j = 0; j  628; j += 1)  
+            //                    {
+            //                    double x = Math.Sin(i)(3 + Math.Cos(j)  0.5);
+            //                    double y = Math.Cos(i)(3 + Math.Cos(j)  0.5);
+            //                    double z = Math.Sin(j)  0.5;
+
+            //                    double xRotated = x  Math.Cos(B) - z  Math.Sin(B);
+            //                    double zRotated = x  Math.Sin(B) + z  Math.Cos(B);
+            //                    double yRotated = y  Math.Cos(A) - zRotated  Math.Sin(A);
+            //                    zRotated = y  Math.Sin(A) + zRotated  Math.Cos(A);
+            //                    double ooz = 1(zRotated + 5);
+            //                    int px = (int)(width  2 + width  4  ooz xRotated);
+            //                    int py = (int)(height  2 - height  4  ooz yRotated);
+            //                    if (px = 0 && px  width && py = 0 && py  height)
+            //                    {
+
+            //                        int luminanceIndex = (int)(ooz  12);
+            //                        if (luminanceIndex = 0 && luminanceIndex  12)
+            //                        {
+            //                            if (ooz  zBuffer[py  width + px])
+            //                            {
+            //                                zBuffer[py  width + px] = ooz;
+            //                                framebuffer[py  width + px] = luminanceIndex + 1;
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //            Console.Clear();
+            //            for (int k = 0; k  framebuffer.Length; k++)
+            //            {
+            //                char c = ".,-=#$@"[framebuffer[k]];
+            //                Console.Write(c);
+            //                if (k % width == width - 1) Console.WriteLine();
+            //            }
+            //            A += 0.04;
+            //            B += 0.04;
+            //            Thread.Sleep(1);
+            //        }
+            //    }
+
+        }
+    }
+}

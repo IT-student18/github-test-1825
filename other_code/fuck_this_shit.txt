@@ -1,0 +1,101 @@
+   //Реализовать для каждой структуры функции добавления, извлечения (удаления), просмотра элементов структуры
+        // Вариант 12.
+        //Элементом структуры данных является точка в пространстве R[3].
+        //Реализовать стек.
+        //Реализовать очередь.
+        //Реализовать двухсвязный список.
+        //public Stack<double[]> pointsSt = new Stack<double[]>
+        //{
+        //new double[] {0.0}
+        //};
+        //public Queue<double[]> pointsQu = new Queue<double[]>();
+
+        //public LinkedList<double[]> pointsLL = new LinkedList<double[]>();
+
+        //static void InputSt()
+        //{
+        //    WriteLine("Enter coordinates(R = 3)");
+        //    pointsSt.Push(new double[] { double.Parse(ReadLine()), double.Parse(ReadLine()) });
+        //}
+        //static void Output()
+        //{ }
+        static void Main(string[] args)
+        {
+            //{   int answ = 0;
+            //    WriteLine("Chose the type of Collection(of points):\nStack - 1\nQueue - 2\nDoublyLinkedList(LinkedList)");
+            //    answ = int.Parse(ReadLine());
+
+            //    switch (answ) {
+            //        case 1:
+
+            //            break;
+            //        case 2:
+
+            //            break;
+            //        case 3:
+
+            //            break;
+            //    }
+            string password = ReadLine();
+            Regex p1 = new Regex(@"\d+");
+            Regex p2 = new Regex(@"[*&{}|+]+");
+            Regex p3 = new Regex(@"(.)\w\2\2");
+            //Regex p2 = new Regex(@"[^*&{}|+]");
+            //Regex p3 = new Regex(@"[a-z]+");
+            //Regex p4 = new Regex(@"\d*");
+            if (18 >= password.Length && password.Length  >= 6 && p1.IsMatch(password) && p2.IsMatch(password)/* && p3.IsMatch(password)*/)
+                Write("True");
+            else
+                Write("False");
+
+            //WriteLine("Enter coordinates of a point on a grid\n(the point should be located in a radius of 3 from (0;0) position.)");
+            //Stack<double[]> points = new Stack<double[]>();
+            //points.Push(new double[] { double.Parse(ReadLine()), double.Parse(ReadLine()) });
+            //int answ = 0;
+            //int ind = 0;
+            //List<double[]> list = new List<double[]>();
+            //while (true)
+            //{
+            //    Clear();
+            //    WriteLine("Chose the following options:\nAdd another point - 1\nPull out an element - 2\nDisplay existing points - 3\nDelete points - 4\nExit - 'enter'");
+            //    try
+            //    {
+            //        answ = int.Parse(ReadLine());
+            //    }
+            //    catch (FormatException)
+            //    {
+            //        break;
+            //    }
+            //    switch (answ)
+            //    {
+            //        case 1:
+            //            WriteLine("Enter coordinates(R = 3)");
+            //            points.Push(new double[] { double.Parse(ReadLine()), double.Parse(ReadLine()) });
+            //            break;
+            //        case 2:
+            //            WriteLine("Write the number of the element");
+            //            ind = int.Parse(ReadLine());
+            //            list = points.ToList();
+            //            WriteLine($"Pulled element:{list[ind][0]},{list[ind][1]}");
+            //            WriteLine("Press a key to go back to the menu");
+            //            ReadKey();
+            //            break;
+            //        case 3:
+            //            foreach (double[] c in points)
+            //            {   
+            //                Write($"({string.Join("; ", c)})\n");
+            //            }
+            //            WriteLine("Press a key to go back to the menu");
+            //            ReadKey();
+            //            break;
+            //        case 4:
+            //            WriteLine("Write the number of the element");
+            //            ind = int.Parse(ReadLine());
+            //            list.RemoveAt(ind);
+            //            WriteLine("Press a key to go back to the menu");
+            //            ReadKey();
+            //            break;
+            //        case 5:
+            //            break;
+            //    }
+            //}

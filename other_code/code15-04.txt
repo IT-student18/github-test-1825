@@ -1,0 +1,189 @@
+namespace ConsoleApp3
+{
+    using System.ComponentModel.Design;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Runtime.ExceptionServices;
+    using static System.Console;
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //задание 15
+
+            //int n = 5;
+            //bool b = false;
+
+            //WriteLine("Введите число строк и столбцов двумерного массива десятичных чисел(0,1,2)");
+            //while (!b)
+            //{
+            //    b = int.TryParse(ReadLine(), out n);
+            //    if (!b)
+            //        WriteLine("Введите десятичное число");
+            //}
+
+            //int[][] A = new int[n][];
+            //for (int i = 0; i < n; i++)
+            //{
+            //    A[i] = new int[n];
+            //}
+            //int auxilarryInt = n - 1;
+            ////A[auxilarryInt][0] = 5;
+            //for (int i = 0; i < n; i++)
+            //{
+            //    for (int j = 0; j < n; j++)
+            //    {
+            //        if (j == auxilarryInt)
+            //            A[j][i] = 1;
+            //        else
+            //        {
+            //            if (i > 0 && j > auxilarryInt)
+            //                A[j][i] = 2;
+            //            else
+            //                A[j][i] = 0;
+            //        }
+            //    }
+            //    auxilarryInt--;
+            //}
+            //for (int i = 0; i < n; i++)
+            //{
+            //    for (int j = 0; j < n; j++)
+            //    {
+            //        Write(A[j][i]);
+
+            //    }
+            //    Write("\n");
+            //}
+
+            //
+            ////задание 14
+            int M = 5;
+            int N = 10;
+            //foreach (int i in Enumerable.Range(0, N).ToArray)
+            //    Console.WriteLine(i);
+
+            //WriteLine(string.Join(",", Enumerable.Range(0, N)));
+
+            bool b = false;
+
+            WriteLine("Enter number of rows");
+            while (!b)
+            {
+                b = int.TryParse(ReadLine(), out M);
+                if (!b)
+                    WriteLine("It must be a natural number");
+            }
+            b = false;
+            WriteLine("Enter number of columns");
+            while (!b)
+            {
+                b = int.TryParse(ReadLine(), out N);
+                if (!b)
+                    WriteLine("It must be a natural number");
+            }
+
+            Random random = new Random();
+            int[][] intMatrix = Enumerable.Range(0, M).Select(x => Enumerable.Range(0, N).Select(z => random.Next(100)).ToArray()).ToArray();
+            int[] min = new int[2];
+            int intAux = 0;
+            foreach (int[] row in intMatrix)
+            {
+
+                for (int i = N-1; i > 0; i--)
+                {
+                    if (row[i] < row[i + 1])
+                    { min[0] = row[i]; min[1] = i;
+                    }
+                    if (row[i] > row[i + 1])
+                    { min[0] = row[i+1]; min[1] = i+1; }
+                }
+                if (!(min[1] == 1))
+                { intAux = row[0];
+                    row[0] = min[0];
+                    row[min[1]] = intAux; 
+                }
+            }
+            foreach (int[] row in intMatrix)
+            {
+                WriteLine(string.Join(", ", row) + "\n");
+            }
+
+            //double[] firstArray = new double[5];
+            //double[] secondArray = new double[5];
+            //int[] MaxMin1Index = new int[2];
+            //int[] MaxMin2Index = new int[2];
+            //WriteLine("Введите 5 вещественных чисел(кроме нуля) для первого массива");
+            //for (int i = 0; i < firstArray.Length; i++)
+            //{
+            //    while (firstArray[i] == 0)
+            //    {
+            //        try { firstArray[i] = double.Parse(ReadLine()); }
+            //        catch (FormatException)
+            //        {
+            //            WriteLine("Введите действительное число в виде целого числа или десятичной дроби.");
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            WriteLine("В вводе есть определённая ошибка:");
+            //            Console.WriteLine(ex.Message);
+            //        }
+            //    }
+            //}
+            //WriteLine("Введите 5 вещественных чисел(кроме нуля) для второго массива");
+            //for (int i = 0; i < secondArray.Length; i++)
+            //{
+            //    while (secondArray[i] == 0)
+            //    {
+            //        try { secondArray[i] = double.Parse(ReadLine()); }
+            //        catch (FormatException)
+            //        {
+            //            WriteLine("Введите действительное число в виде целого числа или десятичной дроби.");
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            WriteLine("В вводе есть определённая ошибка:");
+            //            Console.WriteLine(ex.Message);
+            //        }
+            //    }
+            //}
+            //MaxMin1Index[0] = Array.IndexOf(firstArray, firstArray.Max());
+            //MaxMin1Index[1] = Array.IndexOf(firstArray, firstArray.Min());
+            //MaxMin2Index[0] = Array.IndexOf(secondArray, secondArray.Max());
+            //MaxMin2Index[1] = Array.IndexOf(secondArray, secondArray.Min());
+            //WriteLine($"Первый массив: макс число = firstArray[{MaxMin1Index[0]}]={firstArray[MaxMin1Index[0]]}; мин число = firstArray[{MaxMin1Index[1]}]={firstArray[MaxMin1Index[1]]}");
+            //WriteLine($"Второй массив: макс число = secondArray[{MaxMin2Index[0]}]={secondArray[MaxMin2Index[0]]}; мин число = secondArray[{MaxMin2Index[1]}]={secondArray[MaxMin2Index[1]]}");
+            //WriteLine("Исходные массивы:\n Первый:" + string.Join("; ", firstArray) + "\n Второй:" + string.Join("; ", secondArray));
+            //double doubForSwap = 0;
+            //doubForSwap = firstArray[MaxMin1Index[0]];
+            //firstArray[MaxMin1Index[0]] = firstArray[MaxMin1Index[1]];
+            //firstArray[MaxMin1Index[1]] = doubForSwap;
+            //doubForSwap = secondArray[MaxMin2Index[0]];
+            //secondArray[MaxMin2Index[0]] = secondArray[MaxMin2Index[1]];
+            //secondArray[MaxMin2Index[1]] = doubForSwap;
+            //WriteLine("Массивы где макс и мин числа поменялись местами:\n Первый:" + string.Join("; ", firstArray) + "\n Второй:" + string.Join("; ", secondArray));
+
+            //int[] intArr = new int[3];
+            //WriteLine("Введите 3 Десятичных(кроме нуля) для второго массива");
+            //for (int i = 0; i < intArr.Length; i++)
+            //{
+            //    while (intArr[i] == 0)
+            //    {
+            //        try { intArr[i] = int.Parse(ReadLine()); }
+            //        catch (FormatException)
+            //        {
+            //            WriteLine("Введите десятичное число.");
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            WriteLine("В вводе есть определённая ошибка:");
+            //            Console.WriteLine(ex.Message);
+            //        }
+            //    }
+            //}
+            //string[] binIntArr = intArr.Select(x => Convert.ToString(x, 2)).ToArray();
+            //WriteLine($"Исходный массив из трёх десятичных чисел:\n" + string.Join(", ", intArr));
+            //WriteLine($"Массив из трёх чисел бинарной системы счисления, на основе исходного массива:\n" +string.Join(", ", binIntArr));
+
+        }
+    }
+}

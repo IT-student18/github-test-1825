@@ -1,0 +1,229 @@
+// See https://aka.ms/new-console-template for more information
+using static System.Console;
+///III - 3) б
+///F(a)
+///input:a,b
+static int SumOfDivrs(int a)
+{
+    int b = 0;
+    b = a / 2;
+    int sum = 0;
+    while (b > 0)
+    {
+        if (a % b == 0)
+            sum += b;
+        b--;
+    }
+    return sum+a;
+}
+static (int, int, int) rec(int a, int b, int sum)
+{
+    if (b == a)
+        return (a, b, sum+a);
+    else
+    {
+        if (a % b == 0)
+            return rec(a, b + 1, sum+b);
+        else
+            return rec(a, b + 1, sum);
+
+    }
+}
+static (int,int) rec2(int n, int a)
+{
+    if (a == n)
+    {      
+        WriteLine(string.Concat(string.Join(" ", Enumerable.Repeat(a, a))));
+        return (0, 0);
+    }
+    else
+        {
+            WriteLine(string.Concat(string.Join(" ", Enumerable.Repeat(a, a))));
+            return (n, a + 1);
+        }
+}
+//WriteLine("Enter a,b,N\na,b - the boundaries of a set of numbers\nN - the number, to which should all the sums of divisers be equal");
+//int a = int.Parse(ReadLine());
+//int b = int.Parse(ReadLine());
+//int N = int.Parse(ReadLine());
+//List<int> listOfPLausibles = new List<int>();
+//for (int i = a; i <= b; i++)
+//{
+//    if (rec(i, 1, 0).Item3 == N)
+//        listOfPLausibles.Add(i);
+////}
+//WriteLine("The list of plausible numbers: " + string.Join(", ", listOfPLausibles));
+
+rec2(5, 1);
+
+//WriteLine(SumOfDivrs(num));
+//10 9 8 7 6 5 4 3 2 1=19 + 15 + 11 + 7 + 3 = 21 + 34 = 55
+
+//23.04.25:
+//F_this_place.wpf:
+----XAML:
+<Window x:Class="F_This_place.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:F_This_place"
+        mc:Ignorable="d"
+        Title="Photos" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="imgs" TargetType="Image">
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="Height" Value="200"/>
+            <Setter Property="Margin" Value="5 -70 0 0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Border BorderBrush="DarkCyan" BorderThickness="0 0 0 0.5" Margin="40 5 40 100" Height="33" VerticalAlignment="top" IsHitTestVisible="True">
+            <Grid x:Name="Header" Margin="10 0 10 0" IsHitTestVisible="True">
+                <Image Source="/resources/logo.jpg" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="20" Margin="0 0 0 5"/>
+                <TextBlock VerticalAlignment="Bottom" Margin="40 0 0 5">NBA Management System</TextBlock>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 5">Photos</TextBlock>
+                <Button x:Name="N" Width="60" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 0 5" Content="Back" Click="N_Click"/>
+            </Grid>
+        </Border>
+        <WrapPanel Margin="80,40,90,40" Height="auto" x:Name="Cont">
+            <Button x:Name="T" Margin="10" Height="40" Width="150" Background="DodgerBlue" Foreground="White" FontSize="15" FontFamily="Arial" Click="T_Click">Teams</Button>
+            <Image Source="/resources/Teams/4.jpg" Width="50"/>
+            
+            <Border BorderBrush="Black" BorderThickness="1">
+                <ScrollViewer Height="280" Width="600" Padding="5">
+                    <WrapPanel>
+                        <Image Source="/resources/Pictures/Washington/4.jpg" Visibility="Hidden" Margin="0 -320 0 0"/>
+                        <Image Source="/resources/Pictures/New_Orlean/5.jpg" Style="{StaticResource imgs}"/>
+                        <Image Source="/resources/Pictures/Washington/3.jpg" Style="{StaticResource imgs}"/>
+                        <Image Source="/resources/Pictures/Washington/4.jpg" Style="{StaticResource imgs}"/>
+                        <Image Source="/resources/Pictures/Brooklin/15.jpg" Style="{StaticResource imgs}"/>
+                        <Image Source="/resources/Pictures/Brooklin/16.jpg" Style="{StaticResource imgs}"/>
+                    </WrapPanel>
+                </ScrollViewer>
+            </Border>
+        </WrapPanel>
+        <Button x:Name="Cont2" VerticalAlignment="Bottom" Height="30" Width="auto" Background="DodgerBlue" Foreground="White" FontSize="15" FontFamily="Arial" Margin="30 0 30 10">Teams</Button>
+    </Grid>
+</Window>
+----CS:
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace F_This_place
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void N_Click(object sender, RoutedEventArgs e)
+        {
+            Cont.Visibility = Visibility.Hidden;
+            Cont2.Visibility = Visibility.Hidden;
+        }
+
+        private void T_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+    }
+}
+//ConsoleApp1:
+namespace ConsoleApp1
+{
+    using System.Text.RegularExpressions;
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //Console.WriteLine("Enter License plate number");
+            //string Mark = Console.ReadLine();
+            //bool IsValid = CheckMark(Mark);
+            //Console.WriteLine(IsValid ? "The LPN exists" : "The LPN doesn't exist");
+            //Console.WriteLine(GetNextMarkAfter(Mark));
+
+            Console.WriteLine("Enter IP adress");
+            string Mark = Console.ReadLine();
+            bool IsValid = IsIpValid(Mark);
+            Console.WriteLine(IsValid ? "The IP exists" : "The IP doesn't exist");
+
+        }
+        static bool CheckMark(string lpn)
+        {
+            Regex firstReg = new Regex(@"^[a-z]{1}\d{3}[a-z]{2}\d{3}$");
+            return firstReg.IsMatch(lpn);
+        }
+        static string GetNextMarkAfter(string mark)//97-122
+        {
+            Console.WriteLine("Getting next number(0) or series(1)?");
+            bool p, nextWhat = false;
+            while (true)
+            {
+                p = false;
+                string s = Console.ReadLine();
+                if (s == "0")
+                    nextWhat = false;
+                else
+                    if (s == "1")
+                    nextWhat = true;
+                else
+                {
+                    p = true;
+                    Console.WriteLine("Wrong input. Try entering 0 or 1 again");
+                }
+                if (!p)
+                    break;
+            }
+            if (nextWhat)
+            {
+                char[] CA = mark.ToCharArray();
+                if ((int)CA[5] == 122)
+                {
+                    if ((int)CA[4] == 122)
+                    {
+                        CA[0]++;
+                        CA[4] = 'a';
+                        CA[5] = 'a';
+                    }
+                    else
+                    {
+                        CA[4]++;
+                        CA[5] = 'a';
+                    }
+                }
+                else
+                    CA[5]++;
+                return new string(CA);
+            }
+            else
+            {
+                string SubS = mark.Substring(1, 3) + mark.Substring(6, 3);
+                int i = int.Parse(SubS);
+                i++;
+                SubS = mark[0]+i.ToString().Substring(0,3)+ mark[4] + mark[5] + i.ToString().Substring(3, 3);
+                return SubS;
+            }
+        }
+        static bool IsIpValid(string ip)
+        {
+            Regex secondReg = new Regex(@"^\d{2}\.\d{3}\.\d{3}\.\d{3}$");
+            return secondReg.IsMatch(ip);
+        }
+    }
+}

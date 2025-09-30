@@ -1,0 +1,73 @@
+string[] teams = { "Бавария", "Боруссия", "Реал Мадрид", "Манчестер Сити", "ПСЖ", "Барселона" };
+WriteLine(Output(teams));
+var result = teams.SkipWhile(x => x.StartsWith("Б"));
+//string[] array1 = result.ToArray();
+WriteLine(Output(result.ToArray()));
+var result2 = teams.TakeWhile(x => x.StartsWith("Б"));
+WriteLine(Output(result2.ToArray()));
+static string Output(string[] arS)
+{
+    return string.Join(" ", arS);
+}
+WriteLine("-----------------------------------");
+int ind = Array.IndexOf(teams, teams.Single(x => x == "ПСЖ"));
+WriteLine($"Элемент {ind} в teams: {teams.Single(x=> x =="ПСЖ")}\nЕсли выдаётся null, то значит элементов с значением \"ПСЖ\" несколько");
+string[] newArray = teams.SelectMany((item, index) => index == ind ? new string[] { item, item } : new string[] { item }).ToArray();
+WriteLine(Output(teams));
+
+разница между length и capacity -
+length - колличество char объектов в строке.
+capacity - количество элементов, которые массив способен вместить, без изменения размера.
+
+Grid, UniformGrid, StackPanel, WrapPanel, DockPanel, Canvas;
+
+Stack Panel
+располагает все элементы в ряд либо по горизонтали, либо по вертикали в зависимости от ориентаци.
+По умолчанию значение Orientation = "Vertical". 
+Может содержать в себе другие элементы/контейнеры
+
+    <Grid>
+        <WrapPanel ItemHeight="100" ItemWidth="100">
+            <Button Background="AliceBlue" Content="1"  FontSize="30"></Button>
+            <Button Background="Blue" Content="2" FontSize="30"></Button>
+            <Button Background="Aquamarine" Content="3"  FontSize="30"></Button>
+            <Button Background="DarkGreen" Content="4" FontSize="30"></Button>
+            <Button Background="LightGreen" Content="5"  FontSize="30"></Button>
+            <Button Background="RosyBrown" Content="6"  FontSize="30"></Button>
+            <Button Background="GhostWhite" Content="7"  FontSize="30"></Button>
+        </WrapPanel>
+    </Grid>
+</Window>
+
+<Grid >
+    <Button Content="Left" Width="60" Height="30" HorizontalAlignment="Left"/>
+    <Button Content="Center" Width="60" Height="30" HorizontalAlignment="Center"/>
+    <Button Content="Right" Width="60" Height="30" HorizontalAlignment="Right"/>
+    <Button Content="Stretch" Height="30"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+</Grid>
+
+Padding="left,top,right,bottom"
+
+//Regex myReg = new Regex("Sergey", RegexOptions.IgnoreCase);
+
+//string data1 = "Семен, Андрей,Николай";
+//Regex myReg = new Regex("николай");
+//Regex myRegIC = new Regex("николай", RegexOptions.IgnoreCase);
+//WriteLine(myReg.IsMatch(data1));
+//WriteLine(myRegIC.IsMatch(data1));
+//string email = ReadLine();
+string num = ReadLine();
+//Regex myReg = new Regex(@"[A-Za-z]+[\.A-Za-z0-9_-]*[A-Za-z0-9]+@[A-Za-z]+\.[A-Za-z]+");
+Regex TheReg = new Regex(@"\+\d\(\d{3}\)\d{3}-\d{2}-\d{2}"); //Regex(@"\+\d{1}\(\d{3}\)\d{3}-\d{2}-\d{2}");
+WriteLine(TheReg.IsMatch(num));
+//data1 = myReg.Replace(data1, "Максим");
+//WriteLine(data1);
+//Match match = myReg.Match(data1);+7(965)372-49-78
+//MatchCollection matches = myReg.Matches(data1);
+//WriteLine(matches.Count);hein, quel sympa... ecrits moi un block du code, qui assigne 
+//foreach (Match m in matches)
+//    WriteLine(m.Value);
+//WriteLine(match.Value);
+//WriteLine(match.Index);
+//WriteLine(match.Value);
+ReadKey();

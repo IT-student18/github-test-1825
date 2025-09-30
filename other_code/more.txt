@@ -1,0 +1,91 @@
+namespace ConsoleApp4
+{
+    using static System.Console;
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            //string s = "А это пшеница, которая в тёмном чулане хранится," + " в доме, который построил Джек!";
+            /////
+            //string[] Sentences, Words;
+            //Sentences = s.Split(',');
+            //for (int i = 0; i < Sentences.Length; i++)
+            //    WriteLine($"Sentences[{i}] = {Sentences[i]}");
+            //string txtjoin = string.Join(",", Sentences);
+            //WriteLine();
+            //WriteLine(txtjoin);
+            //Words = s.Split(new char[] {' ',',','!'}, StringSplitOptions.RemoveEmptyEntries);
+            //WriteLine();
+            //for (int i = 0; i < Words.Length; i++)
+            //    WriteLine($"Words[{i}] = {Words[i]}");
+            ////for word in words
+            ////    { for letter in word
+            ////        if (not(char.IsLetter(letter)))
+            ////            word.Remove(letter);
+            ////    }
+            ///
+            //string s = "прекрасная королева Изольда";
+            //string sub = s.Substring(3).Remove(12, 2);
+            //WriteLine(sub);
+            //string sub2 = s.Replace("Изольда", "Елизавета");
+            //sub2 = s.Insert(11, "и очаровательная ");
+            //sub2 = sub2.Replace("королева", "принцесса");
+            //WriteLine(sub2);
+            //static string DeleteBadSpace(string s)
+            //{
+            //    while (s.Contains("  "))
+            //        s = s.Replace("  ", " ");
+            //    return s.Trim();
+            //}
+            //string BetterSpaceDeleting(string s)
+            //{
+            //    return string.Join(' ', s.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+            //}
+            //static string GetInitialsFio(string fio)
+            //{
+            //    var fioMass = fio.Split(' ');
+            //    return $"{fioMass[0]} {fioMass[1].Substring(0, 1)}.{fioMass[2].Substring(0, 1)}.";
+            //}
+            //static string GetInitialsFio2(string fio)
+            //{
+            //    var fioMass = fio.Split(' ');
+            //    return $"{fioMass[0]} {fioMass[1].First()}.{fioMass[2].First()}.";
+            //}
+            //WriteLine("Введите строку(ФИО)");
+            //string inputS = "        Иванов     Аркадий       Фёдорович    ";//ReadLine();
+            //WriteLine(DeleteBadSpace(inputS));
+            //WriteLine(BetterSpaceDeleting(inputS));
+            //WriteLine(GetInitialsFio2(BetterSpaceDeleting(inputS)));
+            string TestNullEmptyString(string s)
+                {
+                if (!string.IsNullOrWhiteSpace(s))
+                    return string.Join('\0', s.ToCharArray().Reverse());
+                else
+                    return "is null or WhiteSpace";
+
+                }
+            string inputS = null;
+            while (inputS != "ded")
+            {
+                inputS = ReadLine();
+                WriteLine(TestNullEmptyString(inputS));
+            }
+            //WriteLine("Введите символ");
+            //try
+            //{
+            //    char a = char.Parse(ReadLine());
+            //    if (Char.IsLetter(a)) WriteLine("Буква");
+            //    if (Char.IsUpper(a)) WriteLine("Верхний регистр");
+            //    if (Char.IsLower(a)) WriteLine("Нижний регистр");
+            //    if (Char.IsControl(a)) WriteLine("Управляющий");
+            //    if (Char.IsNumber(a)) WriteLine("Число");
+            //    if (Char.IsPunctuation(a)) WriteLine("Разделитель");
+            //}
+            //catch
+            //{
+            //    WriteLine("");
+            //}
+        }
+    }
+}

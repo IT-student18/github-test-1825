@@ -1,0 +1,115 @@
+namespace ConsoleApp1
+{
+    using System.Text.RegularExpressions;
+    using System.Collections;
+    using static System.Math;
+    using static System.Console;
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            char[] text = ReadLine().ToCharArray();
+            int CapitalCount = 0;
+            int LowerCaseCount = 0;
+            bool nope = false;
+            foreach (char C in text)
+                nope = char.IsLetter(C) ? (char.IsUpper(C) ? Ad(ref CapitalCount) : Ad(ref LowerCaseCount)) : (false);
+            WriteLine(CapitalCount);
+            WriteLine(LowerCaseCount);
+            if (CapitalCount > LowerCaseCount)
+                text = Enumerable.Range(0, text.Length).Select(x => char.ToUpper(text[x])).ToArray();
+            else
+                if (CapitalCount < LowerCaseCount)
+                text = Enumerable.Range(0, text.Length).Select(x => char.ToLower(text[x])).ToArray();
+            WriteLine(string.Join("", text));
+            //double[] funcsResultVariables = new double[4];
+            //WriteLine("Write the first element(-1<=x<1)");
+            //double first = double.Parse(ReadLine());
+            //WriteLine("Write the accuracy(|x|>|accuracy|)");
+            //double acrcy = double.Parse(ReadLine());
+            //funcsResultVariables = Func(0, first, 0, acrcy).ToTuple().ToString().Split().Select(x => Convert.ToDouble(x)).ToArray();
+            //Write(funcsResultVariables[0]);
+            //WriteLine($"Here's the value of f(x)=ln(1-x) with accuracy of {acrcy}: {}. The last element: x({})= {}");//acrcy = 0,01 ; x1=0.5; x2=0,25/2=0.125;x3=0.125/3=0.041; x4=0,0625/4 = 0,015625; x5 = 0,00625;
+            ReadKey();
+        }
+        static bool Ad(ref int n)
+        {
+            n++;
+            return false;
+        }
+        //   (X^2)/n = -(x/1+x^2/2...) ; -1<=x<1
+        static (int,double, double, double) Func(int n, double x, double sum, double acy)
+        {
+            double X = 0;
+            n+=1;
+            X = Pow(x, n)/n;
+            sum -=X;
+            if (Abs(X) < acy)
+                return (n, x, sum, acy);
+            else
+                return Func(n, x, sum, acy);
+        }
+        //static bool CheckMark(string lpn)
+        //{
+        //    Regex firstReg = new Regex(@"^[a-z]{1}\d{3}[a-z]{2}\d{3}$");
+        //    return firstReg.IsMatch(lpn);
+        //}
+        //static string GetNextMarkAfter(string mark)//97-122
+        //{
+        //    Console.WriteLine("Getting next number(0) or series(1)?");
+        //    bool p, nextWhat = false;
+        //    while (true)
+        //    {
+        //        p = false;
+        //        string s = Console.ReadLine();
+        //        if (s == "0")
+        //            nextWhat = false;
+        //        else
+        //            if (s == "1")
+        //            nextWhat = true;
+        //        else
+        //        {
+        //            p = true;
+        //            Console.WriteLine("Wrong input. Try entering 0 or 1 again");
+        //        }
+        //        if (!p)
+        //            break;
+        //    }
+        //    if (nextWhat)
+        //    {
+        //        char[] CA = mark.ToCharArray();
+        //        if ((int)CA[5] == 122)
+        //        {
+        //            if ((int)CA[4] == 122)
+        //            {
+        //                CA[0]++;
+        //                CA[4] = 'a';
+        //                CA[5] = 'a';
+        //            }
+        //            else
+        //            {
+        //                CA[4]++;
+        //                CA[5] = 'a';
+        //            }
+        //        }
+        //        else
+        //            CA[5]++;
+        //        return new string(CA);
+        //    }
+        //    else
+        //    {
+        //        string SubS = mark.Substring(1, 3) + mark.Substring(6, 3);
+        //        int i = int.Parse(SubS);
+        //        i++;
+        //        SubS = mark[0]+i.ToString().Substring(0,3)+ mark[4] + mark[5] + i.ToString().Substring(3, 3);
+        //        return SubS;
+        //    }
+        //}
+        //static bool IsIpValid(string ip)
+        //{
+        //    Regex secondReg = new Regex(@"^\d{2}\.\d{3}\.\d{3}\.\d{3}$");
+        //    return secondReg.IsMatch(ip);
+        //}
+    }
+}

@@ -54,8 +54,9 @@ body * {
   <text x="40" y="43" font-size="90" fill="white" text-anchor="middle" alignment-baseline="middle"></text>
 </svg>
   <script>
+    let r = [0, 1, 2, 3]
   let a = document.getElementById('eq');
-let out = document.getElementById('o1');
+let out = r[-1].toString();//document.getElementById('o1');
 let b = document.getElementById('re');
 let d = 0.0;
 let cord1 = [parseFloat(getComputedStyle(a).left), parseFloat(getComputedStyle(a).top)];

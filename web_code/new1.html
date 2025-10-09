@@ -20,11 +20,10 @@ body * {
 	width: fit-content;
 	margin: auto;
 }
-#eq {
-	position:absolute;
-	font-size:10vh;
-	left:50%;
-	transform: translate(-50%, 0%);
+#MainCircle {
+	position: absolute;
+  left: 0;
+  top: 0;
 }
 </style>
 </head>
@@ -32,41 +31,39 @@ body * {
 <body class="mt">
 <br>
 <h2 id="o1">noneYet</h2>
-<svg width="80" height="80" id="eq">
-  <circle cx="40" cy="40" r="28" visibility="hidden" stroke="black" stroke-width="3" fill="red" />
-  <text x="40" y="43" font-size="90" fill="white" text-anchor="middle" alignment-baseline="middle">☺</text>
+<svg width="80" height="80" id="MainCircle">
+  <circle cx="40" cy="40" r="38" stroke="black" stroke-width="3" fill="red" />
 </svg>
 
 <script type="module" >
-let a = [0, 0];
-const q = document.getElementById('eq');
+let a = [];
+const mc = document.getElementById('MainCircle');
 const out1 = document.getElementById('o1');
-let intervalId = Array(3).fill(null);
+//let intervalId = Array(2).fill(null);
 const vWid = window.innerWidth;
 const vHei = window.innerHeight;
 
-document.addEventListener('keydown', (event) => {
-  if (event.key === ' ') {
-    if (intervalId[0] === null) {
-      intervalId[0] = setInterval(fall, 10);
-      intervalId[1] = setInterval(createCirc, 3000);
-      intervalId[2] = setInterval(moveCircs , 10);
-    }
-    a[1]=-6;
-    if (event.target === document.body) event.preventDefault();
-  }
-});
-
-function fall() {
-	a[1]+=0.2;
-	a[0]+=a[1];
-	//console.log('works');
-	q.style.top = a[0] + 'px';
-	out1.innerHTML = a.map(num => num.toFixed(2)).join(', ');
-}
-
 function rdint(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+mc.style.left = "0px";
+mc.style.top = "0px";
+
+document.addEventListener("mousemove", (e) => {
+        mc.style.left = `${e.clientX}px`;
+        mc.style.top = `${e.clientY}px`;
+        var computed = getComputedStyle(mc);
+        out1.innerHTML = `${computed.left}, ${computed.top}`;
+      });
+
+function detectLeftButton(evt) {
+    evt = evt || window.event;
+    if ("buttons" in evt) {
+        return evt.buttons == 1;
+    }
+    var button = evt.which || evt.button;
+    return button == 1;
 }
 
 function createCirc(){
@@ -103,26 +100,6 @@ function createCirc(){
   svg.appendChild(circle);
   svg.appendChild(text);
   console.log('works');
-
-//   
-  // Object.assign(el.style, {
-  // color: '#f0f0f0',
-  // fontWeight: 'bold',
-  // backgroundColor: `rgb(${ranar.join(',')})`,
-  // padding: '10px',
-  // borderRadius: '50%',
-  // display: 'flex',
-  // alignItems: 'center',
-  // justifyContent: 'center',
-  // width: wid,
-  // aspectRatio: 1/1,
-  // position:'absolute',
-  // left:`${vWid}px`,
-  // top:`${rdint(0,vHei)}px`,
-  // //top:`${q.style.top}`,
-  // transform: 'translate(-50%, 0%)',
-  // });
-  // el.textContent = 'lol';
 }
 
 function moveCircs(){

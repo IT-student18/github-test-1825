@@ -32,30 +32,44 @@ body * {
 <body class="mt">
 <br>
 <h2 id="o1">noneYet</h2>
+<svg width="10" height="10" id="noz" style="position: absolute; left:0px; top:0px;">
+  <circle cx="5" cy="5" r="4" visibility="shown" stroke="purple" stroke-width="2" fill="blue" />
+</svg>
+<svg width="10" height="10" id="noz1" style="position: absolute; left:0px; top:0px;">
+  <circle cx="5" cy="5" r="4" visibility="shown" stroke="purple" stroke-width="2" fill="red" />
+</svg>
 <svg width="80" height="80" id="eq">
   <circle cx="40" cy="40" r="28" visibility="hidden" stroke="black" stroke-width="3" fill="red" />
   <text x="40" y="43" font-size="90" fill="white" text-anchor="middle" alignment-baseline="middle">☺</text>
 </svg>
-
+<!-- q - ☺; out 1 - output-text element; a - cords of q; -->
 <script type="module" >
-let a = [0, 0];
-const q = document.getElementById('eq');
-const out1 = document.getElementById('o1');
-let intervalId = Array(3).fill(null);
+let a, hasColided;
+let out1 = document.getElementById('o1');
+let intervalId = Array(4).fill(null);
+let q = document.getElementById('eq');
+let b = document.getElementsByTagName('body')[0];
 const vWid = window.innerWidth;
 const vHei = window.innerHeight;
+let cord1 = [0,0], cord2 = [0,0];
 
-document.addEventListener('keydown', (event) => {
+const keyHandler = (event) => {
   if (event.key === ' ') {
     if (intervalId[0] === null) {
       intervalId[0] = setInterval(fall, 10);
       intervalId[1] = setInterval(createCirc, 3000);
-      intervalId[2] = setInterval(moveCircs , 10);
+      intervalId[2] = setInterval(moveCircs, 10);
+      intervalId[3] = setInterval(colDetect, 10);
     }
-    a[1]=-6;
-    if (event.target === document.body) event.preventDefault();
+    a[1] = -6;
+    if (event.target === b) event.preventDefault();
   }
-});
+};
+function start() {
+    a = [0, 0];
+    let hasColided = false;
+    document.addEventListener('keydown', keyHandler);
+  }
 
 function fall() {
 	a[1]+=0.2;
@@ -63,6 +77,7 @@ function fall() {
 	//console.log('works');
 	q.style.top = a[0] + 'px';
 	out1.innerHTML = a.map(num => num.toFixed(2)).join(', ');
+  cord1 = [parseFloat(getComputedStyle(q).left)-28, parseFloat(getComputedStyle(q).top)+ 40];
 }
 
 function rdint(min, max) {
@@ -99,7 +114,7 @@ function createCirc(){
   text.setAttribute('text-anchor', 'middle');
   text.setAttribute('alignment-baseline', 'middle');
   text.textContent = 'lol';
-  document.body.appendChild(svg);
+  b.appendChild(svg);
   svg.appendChild(circle);
   svg.appendChild(text);
   console.log('works');
@@ -125,6 +140,7 @@ function createCirc(){
   // el.textContent = 'lol';
 }
 
+
 function moveCircs(){
   const arrOfElts = document.getElementsByClassName('atacker');
   Array.from(arrOfElts).forEach(element => {
@@ -132,10 +148,35 @@ function moveCircs(){
     const lef = parseFloat(getComputedStyle(element).left);
     element.style.left = `${lef - 3}px`;
     if (lef<= -wid1) element.style.left = `${vWid - wid1}px`;
+    cord2 = [parseFloat(getComputedStyle(element).left), parseFloat(getComputedStyle(element).top)];
+    hasColided = Math.sqrt((Math.pow((cord1[0]-cord2[0]), 2)) + (Math.pow((cord1[1]-cord2[1]), 2))) <= element.querySelector('circle').r.baseVal.value;
+    element.querySelector('text').textContent = Math.sqrt( (Math.pow((cord1[0]-cord2[0]), 2)) + (Math.pow((cord1[1]-cord2[1]), 2)) ).toFixed(0).toString() + ' | ' + element.querySelector('circle').r.baseVal.value.toString();
+    console.log(hasColided);
   });
 }
 
+// function colDetect(elt) {
+    
+// }
 
+function colDetect(){
+  document.getElementById('noz').style.left = cord1[0];
+  document.getElementById('noz').style.top = cord1[1];
+  document.getElementById('noz1').style.left = cord2[0];
+  document.getElementById('noz1').style.top = cord2[1];
+  if (hasColided){
+      intervalId.forEach(id => id && clearInterval(id));
+      document.querySelectorAll('.attacker').forEach(el => el.remove());
+      document.removeEventListener('keydown', keyHandler);
+      console.log(cord1, cord2, hasColided);
+       document.appendChild(
+       Object.assign(
+         document.createElement("h1"), {innerHTML: "Opps, You messed up!", style:"font-size:100px; color: red; position absolute; left:50%; top:50%; transform: translate(-50%, -50%);"})
+       )
+  }
+}
+
+start();
 </script>
 
 </body>

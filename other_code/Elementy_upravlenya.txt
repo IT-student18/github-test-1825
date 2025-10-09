@@ -1,0 +1,176 @@
+------------XAML:
+<Window x:Class="elementy_upravlenya_AAAAAAAAAAA.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:elementy_upravlenya_AAAAAAAAAAA"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+	<Canvas>
+        <Button Width="200"
+             Height="50"
+             Content="OK"
+             FontFamily="Comic Sans MS"
+             FontSize="30"
+             Foreground="#FF0000FF"
+             x:Name ="Idk"
+             Canvas.Left="300"
+             Canvas.Top="10"
+             Click="Idk_Click"/>
+    </Canvas>
+	<!--<Grid Width="800" Height="450">
+			<StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+				<TextBox FontSize="20" SpellCheck.IsEnabled="True" Language="en-us" x:Name="Txt">
+					hillo
+				</TextBox>
+				<TextBox TextWrapping="Wrap" SelectionLength="5" MaxLength="50" TextChanged="TextBox_TextChanged" Width="50" Height="20">
+				</TextBox>
+				<PasswordBox PasswordChar="$" MaxLength="10" Width="150" Height="50" BorderBrush="Black"/>
+			</StackPanel>
+		</Grid>-->
+</Window>
+------------CS:
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Threading;
+
+namespace elementy_upravlenya_AAAAAAAAAAA
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    /// 
+    
+    public partial class MainWindow : Window
+    {
+        private DispatcherTimer timer;
+        //public double x = 0;
+        public double y = 0;
+        public int z = 0;
+        public MainWindow()
+        {
+            InitializeComponent();
+            this.KeyDown += MainWindow_KeyDown;
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(10);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+            Idk.Content = char.ConvertFromUtf32(Convert.ToInt32("1F480", 16));
+        }
+
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                y = -10;
+            }
+            if (e.Key == Key.End)
+            {
+                z = 1;
+            }
+            if (e.Key == Key.Home)
+            {
+                z = 0;
+            }
+            if (e.Key == Key.Insert)
+            {
+                if (Idk.Visibility == Visibility.Hidden)
+                    Idk.Visibility = Visibility.Visible;
+                else
+                    Idk.Visibility = Visibility.Hidden;
+            }
+            if (e.Key == Key.R)
+                if (Idk.FontStyle == FontStyles.Italic)
+                    Idk.FontStyle = FontStyles.Normal;
+                else
+                    Idk.FontStyle = FontStyles.Italic;
+
+        }
+
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            //double left = Canvas.GetLeft(Idk);
+            double top = Canvas.GetTop(Idk);
+            if (z == 0)
+            {
+                if (y<20)
+                    y += 0.5;
+                Canvas.SetTop(Idk, top + y);
+            }
+            //Canvas.SetLeft(Idk, left + x);
+
+        }
+
+        private void Idk_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Pause...");
+            Idk.Focusable = false;
+        }
+
+        //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    var textBox = sender as TextBox;
+        //    if (textBox != null && textBox.Text == "red")
+        //    {
+        //        textBox.Background = Brushes.Pink;
+        //    }
+        //    else
+        //    {
+        //        if (textBox != null && textBox.Text == "green")
+        //        {
+        //            textBox.Background = Brushes.LightGreen;
+        //        }
+        //        else
+        //        {
+        //            if (textBox != null && textBox.Text == "blue")
+        //            {
+        //                textBox.Background = Brushes.LightBlue;
+        //            }
+        //            else
+        //            {
+        //                textBox.Background = Brushes.White;
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MessageBox.Show("Deal");
+        //    MessageBox.Show("Bu-ha-ha-ha-ha-ha-ha!");
+        //    this.Close();
+        //}
+
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    Stack1.Visibility = Visibility.Collapsed;
+        //    Thread.Sleep(5000);
+        //    MessageBox.Show("Curse you!");
+        //    MessageBox.Show("Menacing_magic_leaving_sounds*");
+        //    Thread.Sleep(3000);
+        //    this.Close();
+        //}
+
+        //{
+
+        //    double left = Canvas.GetLeft(Idk);
+        //    double top = Canvas.GetTop(Idk);
+        //    x += 0.1;
+        //    y+= 0.1;
+        //    if (e.Key == Key.Enter)
+        //    {
+        //        Canvas.SetLeft(Idk, left + x);
+        //        Canvas.SetTop(Idk, top + y);
+        //    }
+        //}
+    }
+}

@@ -1,0 +1,21 @@
+cs:
+private void Timer_Tick(object? sender, EventArgs e)
+{
+    //double left = Canvas.GetLeft(Idk);
+    double top = Canvas.GetTop(Idk);
+    double OsbtRight = Canvas.GetRight(Obstacle_Top);
+    if (z == 0)
+    {
+        y += 0.5;
+        Canvas.SetTop(Idk, top + y);
+        Canvas.SetRight(Obstacle_Top, OsbtRight + 2);
+        Canvas.SetRight(Obstacle_Bottom, OsbtRight + 2);
+    }
+
+    //Canvas.SetLeft(Idk, left + x);
+
+}
+xaml:
+<Button x:Name="Obstacle_Top" Background="White" Content="Cloud" Canvas.Right="-100" Canvas.Top="0" Width ="200" Height ="100"/>
+<Button x:Name="Obstacle_Bottom" Background="Cyan" Content="Sea" Canvas.Left="0" Canvas.Bottom="0" Width ="800" Height ="20"/>
+<Button x:Name="Bottom" Background="Cyan" Content="Wave" Canvas.Right="-100" Canvas.Bottom="20" Width ="200" Height ="50"/>

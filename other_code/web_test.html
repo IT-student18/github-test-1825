@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head meta charset="UTF-8" meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+	background-image:url('codes_n_stuff/web/site_fence/content/un_ornament_francais.png');
+	display:flex;
+	flex-direction:column;
+	text-align: center;
+	background-size: cover;
+    background-repeat: repeat;
+    width: 100%;
+}
+.nav {	display: flex;
+	flex-wrap: wrap;
+	height:200px;
+	width: 100%;
+	position: relative;
+	margin: 110px auto 30px auto;
+	/*align-self: center;
+	width: 800px;
+	margin: 10px auto 20px auto;
+	justify-content: space-between;*/
+}
+.nav a {width: fit-content;
+	height:fit-content;
+	background: none;
+  	border: none;
+  	padding: 0px;
+	z-index: 1;
+	position: absolute;
+	pointer-events: auto;
+	display: inline-block;
+  	text-decoration: none;
+	
+	/*clip-path: polygon(...);  define polygon matching visible shape */
+	/*color: darkred;
+	background-color:blue;
+	border: 3px dashed rgb(88, 0, 0);
+	margin: 5px 0px 5px 0px;
+	padding: 2px 4px 2px 4px;
+	font-size: 20px;
+	width: fit-content;
+	box-shadow: inset 0px 0px 20px black;
+	text-decoration: none;
+	font-family: "Segoe Script", cursive;
+	font-weight: bold;
+        font-family: "Comic Sans MS";*/
+}
+
+.nav .btn .overlay-text {
+  position: absolute;
+  top: 40%;
+  left: 43%;
+  color: rgba(255, 255, 255, 0);
+  pointer-events: auto;
+  user-select: none;
+  white-space: nowrap;
+  font-size: 38px;
+  letter-spacing: 5px;
+}
+
+.nav .btn img {
+	width: auto;
+  	height: auto;
+  	transform: scale(0.8);
+	filter: drop-shadow(5px 5px 10px rgba(255, 0, 187, 0.7));
+	pointer-events: none;
+}
+#this_text {
+    display: none;
+    margin:30px auto 30px auto;
+}
+
+#this_text:target {
+  display: block;
+}
+
+.center_line_b
+{
+	display:flex;
+	align-self: center;
+	width: 80%;
+	height:fit-content;
+}
+.center_line_in
+{
+	display:flex;
+	align-self: center;
+	flex-direction:column;
+	width: 90%;
+	margin: 0px auto 0px auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    .center_line_b {
+      background-color: rgb(50,50,50);
+    }
+	.center_line_in {
+      background-color: dimgrey;
+    }
+	.tittle_and_nav {
+		background-color:lightgray;
+	}
+
+
+  }
+</style>
+
+</head>
+
+<body>
+
+<div class="center_line_b">
+<div class="center_line_in">
+<div class="tittle_and_nav">
+<img src="codes_n_stuff/web/site_fence/content/title_frame4.png" alt="description" style="width: 100%; heiht:auto; align-self:center;">
+
+<br>
+
+<p style="text-shadow: 2px 2px 5px black; color: #FF007F"><i style="font-size:20px;margin: 10px, auto, 10px, auto;">Сайт для изучения французского языка.</i></p>
+
+
+<div class="nav">
+<div tag="b1" class="btn" style="top:52px; left:-2px; z-index: 2;">
+ 
+ <img src="codes_n_stuff/web/site_fence/content/глав.png" alt="description">
+ 
+	
+	<a class="overlay-text" href="#this_text" >Главная</a>
+</div>
+</div>
+
+<p id="this_text">This is the hidden text.</p>
+
+</div>
+
+ 
+</div><!--End of main_line-->
+
+</body>
+</html>
+<!--https://www.perplexity.ai/search/hello-i-was-into-french-and-we-BavDSgWFQQO5lM8coKz.tA
+https://www.perplexity.ai/search/can-i-ake-y-site-not-oey-dark-pNNhgWxATn.vNQYKEdz.cA?login-new=false&login-source=fileUpload
+
+filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+
+https://i.pinimg.com/originals/97/ca/1f/97ca1f59bc7284f69133dc5af5706eb5.jpg
+
+https://www.perplexity.ai/search/explain-how-to-write-an-html-g-Ju.euhS1QPqGjObdvbi0tw?0=d&8=d
+-->

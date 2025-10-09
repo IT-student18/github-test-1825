@@ -1,0 +1,61 @@
+using System;
+using System.Threading;
+class Program
+{
+    static void Main()
+    {
+        double A = 0, B = 0;  Rotation angles
+        const int width = 120;
+        const int height = 60;
+        int[] framebuffer = new int[width  height];
+        double[] zBuffer = new double[width  height];
+        while (true)
+        {
+            Array.Fill(framebuffer, 0);  Clear framebuffer
+            Array.Fill(zBuffer, double.MinValue);  Clear z-buffer to minimum values
+            for (int i = 0; i  628; i += 2)  Loop through angles (increased step for performance)
+            {
+                for (int j = 0; j  628; j += 1)  Loop through angles
+                {
+                    double x = Math.Sin(i)  (3 + Math.Cos(j)  0.5);
+                    double y = Math.Cos(i)  (3 + Math.Cos(j)  0.5);
+                    double z = Math.Sin(j)  0.5;
+                     Rotate around X and Y axes using A and B
+                    double xRotated = x  Math.Cos(B) - z  Math.Sin(B);
+                    double zRotated = x  Math.Sin(B) + z  Math.Cos(B);
+                    double yRotated = y  Math.Cos(A) - zRotated  Math.Sin(A);
+                    zRotated = y  Math.Sin(A) + zRotated  Math.Cos(A);
+                     Project the 3D coordinates onto the 2D screen
+                    double ooz = 1  (zRotated + 5);  One over z
+                    int px = (int)(width  2 + width  4  ooz  xRotated);
+                    int py = (int)(height  2 - height  4  ooz  yRotated);
+                     Check if the projected point is within bounds
+                    if (px = 0 && px  width && py = 0 && py  height)
+                    {
+                         Calculate brightness based on angle
+                        int luminanceIndex = (int)(ooz  12);
+                        if (luminanceIndex = 0 && luminanceIndex  12)
+                        {
+                            if (ooz  zBuffer[py  width + px])
+                            {
+                                zBuffer[py  width + px] = ooz;  Update z-buffer
+                                framebuffer[py  width + px] = luminanceIndex + 1;  Set pixel brightness
+                            }
+                        }
+                    }
+                }
+            }
+             Render the framebuffer to the console
+            Console.Clear();
+            for (int k = 0; k  framebuffer.Length; k++)
+            {
+                char c = .,-=#$@[framebuffer[k]];
+                Console.Write(c);
+                if (k % width == width - 1) Console.WriteLine();  New line at the end of each row
+            }
+            A += 0.04;  Increment rotation angle A
+            B += 0.04;  Increment rotation angle B
+            Thread.Sleep(1);  Control speed of rotation
+        }
+    }
+}

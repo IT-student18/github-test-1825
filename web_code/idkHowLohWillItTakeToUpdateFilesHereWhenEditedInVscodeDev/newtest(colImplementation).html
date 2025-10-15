@@ -50,7 +50,7 @@ body * {
 </svg>
 
 <svg width="52" height="52" id="smallCirc">
-  <circle cx="26" cy="26" r="3" fill="blue" />
+  <circle cx="26" cy="26" r="3" fill="blue"/>
 </svg>
 
 <script type="module" >
@@ -81,28 +81,43 @@ Reds.forEach(element => {
     element.style.top = `${rdint(90, vHei)}px`;
 });
 r.style.position = 'absolute';
-document.addEventListener("touchmove", moveOnInteract);
-document.addEventListener("touchstart", moveOnInteract);
-intervalId[0] = setInterval(colDetect, 10);
+if (isAndroid) {
+  document.addEventListener("touchmove", moveOnInteract);
+  document.addEventListener("touchstart", moveOnInteract);
+} else {
+  document.addEventListener("mousemove", moveOnInteract);
+  document.addEventListener("click", moveOnInteract);
+}
+
+intervalId[0] = setInterval(colDetect, 1);
 
 function rdint(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function colDetect(){
+    out1.innerHTML = `Page: (${a[0].toFixed(2)},${a[1].toFixed(2)})`;
+    var isCol = false;
     Reds.forEach(element => {
         b = [parseFloat(element.style.left) + element.width.baseVal.value/2, parseFloat(element.style.top)];
         d = dist(a,b);
         element.querySelector('text').textContent = d;
-        if (d <= element.querySelector('circle').r.baseVal.value + q.querySelector('circle').r.baseVal.value) {
-          q.querySelector('circle').setAttribute('fill', 'yellow');
-          /*element.style.left = `${rdint(0, vWid)}px`;
-          element.style.top = `${rdint(90, vHei)}px`*/} else {
-           q.querySelector('circle').setAttribute('fill', 'green');}
-        //console.log("works");
+        var rsum = element.querySelector('circle').r.baseVal.value + q.querySelector('circle').r.baseVal.value;
+        // if (d <= rsum) {
+        //   q.querySelector('circle').setAttribute('fill', 'yellow');
+        //   /*element.style.left = `${rdint(0, vWid)}px`;
+        //   element.style.top = `${rdint(90, vHei)}px`*/} else {
+        //   q.querySelector('circle').setAttribute('fill', 'green');}
+        if (d<=rsum) {out1.innerHTML += ' | ' + '<i style="color:green">!!!<i>';
+        } else out1.innerHTML += ' | ' + d.toFixed(2).toString();
         });
+        if (out1.innerHTML.slice(out1.innerHTML.indexOf('|') + 1).split('|').includes('!!!')) {
+          console.log("!!!");
+        }s
         r.style.left = b[0].toString() + 'px';
         r.style.top = b[1].toString() + 'px';
+        if (isCol) {q.querySelector('circle').setAttribute('fill', 'yellow'); console.log("works, but doesn't");}
+        console.log(isCol);
 }
 
 function dist([x1,y1],[x2,y2]){
@@ -114,70 +129,13 @@ function moveOnInteract(e) {
     if (isAndroid) {
     a[0] = e.touches[0].pageX - q.width.baseVal.value/2;
     a[1] = e.touches[0].pageY - q.height.baseVal.value/2;
-    out1.innerHTML = `Page: (${a[0].toFixed(2)},${a[1].toFixed(2)}), d=${d}`;
     } else {
         a[0] = e.pageX;
         a[1] = e.pageY;
-         out1.innerHTML = `Page: (${a[0].toFixed(2)},${a[1].toFixed(2)}), d=${d}`;
+        out1.innerHTML = `Page: (${a[0].toFixed(2)},${a[1].toFixed(2)}), d=${d}`;
     }
     q.style.left = `${a[0]}px`;
     q.style.top = `${a[1]}px`;
-}
-
-function createCirc(){
-  var ranar = Array.from({ length: 3 }, () => rdint(0, 255));
-  let wid = `${rdint(50,200)}`;
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('width', wid);
-  svg.setAttribute('height', wid);
-  svg.setAttribute('class', 'atacker');
-  // svg.setAttribute('width', wid+3);
-  // svg.setAttribute('height', wid+3); !!!!????
-  svg.setAttribute('viewBox', `0 0 ${wid} ${wid}`);
-  svg.style.position = 'absolute';
-  svg.style.left = `${vWid - wid}px`;
-  svg.style.top = `${rdint(0,vHei)}px`;
-  
-  const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-  circle.setAttribute('cx', wid/2);
-  circle.setAttribute('cy', wid/2);
-  circle.setAttribute('r', wid/2-3);
-  circle.setAttribute('fill', `rgb(${ranar.join(',')})`);
-  circle.setAttribute('stroke', 'black');
-  circle.setAttribute('stroke-width', '3');
-
-  const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-  text.setAttribute('x', wid/2);
-  text.setAttribute('y', wid/2 + 5);
-  text.setAttribute('font-size', '24');
-  text.setAttribute('fill', 'white');
-  text.setAttribute('text-anchor', 'middle');
-  text.setAttribute('alignment-baseline', 'middle');
-  text.textContent = 'lol';
-  document.body.appendChild(svg);
-  svg.appendChild(circle);
-  svg.appendChild(text);
-  console.log('works');
-
-//   
-  // Object.assign(el.style, {
-  // color: '#f0f0f0',
-  // fontWeight: 'bold',
-  // backgroundColor: `rgb(${ranar.join(',')})`,
-  // padding: '10px',
-  // borderRadius: '50%',
-  // display: 'flex',
-  // alignItems: 'center',
-  // justifyContent: 'center',
-  // width: wid,
-  // aspectRatio: 1/1,
-  // position:'absolute',
-  // left:`${vWid}px`,
-  // top:`${rdint(0,vHei)}px`,
-  // //top:`${q.style.top}`,
-  // transform: 'translate(-50%, 0%)',
-  // });
-  // el.textContent = 'lol';
 }
 
 function moveCircs(){

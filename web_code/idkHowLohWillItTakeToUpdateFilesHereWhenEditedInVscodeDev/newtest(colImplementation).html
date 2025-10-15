@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<style>
+html {	
+    	width:100%;
+    	height:100%;
+	background-color: dimgrey;
+}
+body { 
+    margin: auto;
+    position: relative;
+    padding: auto;
+    text-wrap: wrap;
+    width: 80vw;
+}
+
+body * {
+	width: fit-content;
+	margin: auto;
+}
+#MainCirc {
+	position:absolute;
+	font-size:10vh;
+	left:50%;
+	transform: translate(-50%, 0%);
+}
+
+#smallCirc {
+	position:absolute;
+	font-size:10vh;
+	left:50%;
+	transform: translate(-50%, 0%);
+	/*background-color: white;*/
+}
+</style>
+</head>
+
+<body class="mt">
+<br>
+<h2 id="o1">noneYet</h2>
+<svg width="58" height="58" id="MainCirc">
+  <circle cx="29" cy="29" r="28" stroke="black" stroke-width="2" fill="green" />
+</svg>
+
+<svg width="52" height="52" class="RedCirc">
+  <text> </text>
+  <circle cx="26" cy="26" r="25" stroke="black" stroke-width="2" fill="red" />
+</svg>
+
+<svg width="52" height="52" id="smallCirc">
+  <circle cx="26" cy="26" r="3" fill="blue" />
+</svg>
+
+<script type="module" >
+Math.random();
+let a = [0, 0];
+let b = [...a];
+let d = 99999, r;
+let intervalId = Array(3).fill(null);
+const vWid = window.innerWidth;
+const vHei = window.innerHeight;
+const isAndroid = /(android)/i.test(navigator.userAgent);
+
+const q = document.getElementById('MainCirc');
+const out1 = document.getElementById('o1');
+const Reds = [];
+r = document.getElementById('smallCirc');
+let n = 4;
+for (let i = 0; i<n; i++){
+    var clonedElement = document.getElementsByClassName('RedCirc')[0].cloneNode(true);
+    document.body.appendChild(clonedElement);
+}
+[...document.getElementsByClassName('RedCirc')].forEach(element => {
+    Reds.push(element);
+});
+Reds.forEach(element => {
+    element.style.position = 'absolute';
+    element.style.left = `${rdint(0, vWid)}px`;
+    element.style.top = `${rdint(90, vHei)}px`;
+});
+r.style.position = 'absolute';
+document.addEventListener("touchmove", moveOnInteract);
+document.addEventListener("touchstart", moveOnInteract);
+intervalId[0] = setInterval(colDetect, 10);
+
+function rdint(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function colDetect(){
+    Reds.forEach(element => {
+        b = [parseFloat(element.style.left) + element.width.baseVal.value/2, parseFloat(element.style.top)];
+        d = dist(a,b);
+        element.querySelector('text').textContent = d;
+        if (d <= element.querySelector('circle').r.baseVal.value + q.querySelector('circle').r.baseVal.value) {
+          q.querySelector('circle').setAttribute('fill', 'yellow');
+          /*element.style.left = `${rdint(0, vWid)}px`;
+          element.style.top = `${rdint(90, vHei)}px`*/} else {
+           q.querySelector('circle').setAttribute('fill', 'green');}
+        //console.log("works");
+        });
+        r.style.left = b[0].toString() + 'px';
+        r.style.top = b[1].toString() + 'px';
+}
+
+function dist([x1,y1],[x2,y2]){
+    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+}
+
+function moveOnInteract(e) {
+    e.preventDefault();
+    if (isAndroid) {
+    a[0] = e.touches[0].pageX - q.width.baseVal.value/2;
+    a[1] = e.touches[0].pageY - q.height.baseVal.value/2;
+    out1.innerHTML = `Page: (${a[0].toFixed(2)},${a[1].toFixed(2)}), d=${d}`;
+    } else {
+        a[0] = e.pageX;
+        a[1] = e.pageY;
+         out1.innerHTML = `Page: (${a[0].toFixed(2)},${a[1].toFixed(2)}), d=${d}`;
+    }
+    q.style.left = `${a[0]}px`;
+    q.style.top = `${a[1]}px`;
+}
+
+function createCirc(){
+  var ranar = Array.from({ length: 3 }, () => rdint(0, 255));
+  let wid = `${rdint(50,200)}`;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('width', wid);
+  svg.setAttribute('height', wid);
+  svg.setAttribute('class', 'atacker');
+  // svg.setAttribute('width', wid+3);
+  // svg.setAttribute('height', wid+3); !!!!????
+  svg.setAttribute('viewBox', `0 0 ${wid} ${wid}`);
+  svg.style.position = 'absolute';
+  svg.style.left = `${vWid - wid}px`;
+  svg.style.top = `${rdint(0,vHei)}px`;
+  
+  const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  circle.setAttribute('cx', wid/2);
+  circle.setAttribute('cy', wid/2);
+  circle.setAttribute('r', wid/2-3);
+  circle.setAttribute('fill', `rgb(${ranar.join(',')})`);
+  circle.setAttribute('stroke', 'black');
+  circle.setAttribute('stroke-width', '3');
+
+  const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.setAttribute('x', wid/2);
+  text.setAttribute('y', wid/2 + 5);
+  text.setAttribute('font-size', '24');
+  text.setAttribute('fill', 'white');
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('alignment-baseline', 'middle');
+  text.textContent = 'lol';
+  document.body.appendChild(svg);
+  svg.appendChild(circle);
+  svg.appendChild(text);
+  console.log('works');
+
+//   
+  // Object.assign(el.style, {
+  // color: '#f0f0f0',
+  // fontWeight: 'bold',
+  // backgroundColor: `rgb(${ranar.join(',')})`,
+  // padding: '10px',
+  // borderRadius: '50%',
+  // display: 'flex',
+  // alignItems: 'center',
+  // justifyContent: 'center',
+  // width: wid,
+  // aspectRatio: 1/1,
+  // position:'absolute',
+  // left:`${vWid}px`,
+  // top:`${rdint(0,vHei)}px`,
+  // //top:`${q.style.top}`,
+  // transform: 'translate(-50%, 0%)',
+  // });
+  // el.textContent = 'lol';
+}
+
+function moveCircs(){
+  const arrOfElts = document.getElementsByClassName('atacker');
+  Array.from(arrOfElts).forEach(element => {
+    const wid1 = element.width.baseVal.value;
+    const lef = parseFloat(getComputedStyle(element).left);
+    element.style.left = `${lef - 3}px`;
+    if (lef<= -wid1) element.style.left = `${vWid - wid1}px`;
+  });
+}
+
+
+</script>
+
+</body>
+<!-- src="myScript.js"m-->
+</html>

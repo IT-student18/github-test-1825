@@ -80,7 +80,207 @@ body * {
   <circle cx="26" cy="26" r="3" fill="red" />
 </svg>
 
+<script type="module">
+//To Do 4 fully working prototype:
+//- game over screen v
+//space to jump on pc v
+//- restart option v
+//- upper and lower border v
+// pause the game
+//- better gameplay(balance between circle spawn, size, and mc's jump-height)
+//- better names for variables? 
+/*let n = 5;
+for (let i = 0; i<n; i++){
+    var clonedElement = document.getElementsByClassName('RedCirc')[0].cloneNode(true);
+    document.body.appendChild(clonedElement);
+}
+[...document.getElementsByClassName('RedCirc')].forEach(element => {
+    Reds.push(element);
+});
+Reds.forEach(element => {
+    element.style.position = 'absolute';
+    element.style.left = `${rdint(0, vWid)}px`;
+    element.style.top = `${rdint(90, vHei)}px`;
+});*/
+
+let a, af, b, d, upperBorder, Pause;//, anyCollision;
+const g = 1;
+const s = [20, 10, 10, 3000];//fall() delay; jump height; moveCirc delay; CreateCirce delay.
+let intervalId = Array(4).fill(null);
+const vWid = window.innerWidth;
+const vHei = window.innerHeight;
+const isAndroid = /(android)/i.test(navigator.userAgent);
+const q = document.getElementById('MainCirc');
+let mark = document.getElementById('smallCirc');
+const out1 = document.getElementById('o1');
+const gg = document.getElementById('gover');
+const Reds = [];
+
+start();
+/*if (isAndroid) {
+//r.style.position = 'absolute';
+document.addEventListener("touchmove", moveOnInteract);
+document.addEventListener("touchstart", moveOnInteract);
+} else {
+    document.addEventListener("mousemove", moveOnInteract);
+};*/
+//!!!!
+Element.prototype.setAttributes = function(attrs) {
+  for (let key in attrs) {
+    this.setAttribute(key, attrs[key]);
+  }
+};
+//!!!!
+function rdint(min, max) {
+  const rand = Math.pow(Math.random(), 2);
+  return Math.floor(rand * (max - min + 1)) + min;
+}
+CreateCirc();
+function start() {
+    a = [0, 0];
+    af = [...a];
+    b = [...a];
+    d = 99999;
+    gg.style.display = 'none';
+    mark.style.display = 'none';
+    out1.style.display = 'none';
+    upperBorder = Pause = false;
+    //anyCollision = false;
+    intervalId[0] = setInterval(doTilPause(colDetect), 1);
+    intervalId[1] = setInterval(doTilPause(fall), s[0]);
+    intervalId[2] = setInterval(doTilPause(CreateCirc), s[3]);
+    intervalId[4] = setInterval(doTilPause(moveCircs), s[2]);
+    setPos();
+    if (isAndroid) {
+      document.addEventListener('touchstart', () => {if (!upperBorder) a[1] = -s[1]});
+    } else {
+      document.addEventListener('keydown', (e) => {if ((e.code === 'Space') && (!upperBorder)) a[1] = -s[1]});
+    }
+    // document.addEventListener('pointerup', () => {a[1] = -20;
+    // //Reds[0].style.left = `${parseFloat(getComputedStyle(Reds[0]).left)-1}px`;});
+    // //setTimeout(gOver, 5000);
+    // });
+}
+
+function doTilPause(func) {
+  if (!Pause) return func();
+}
+
+function setPos(){
+    q.style.top = `${q.height.baseVal.value}px`;
+    q.style.left = '100px';
+}
+
+function fall(){
+    a[0] += a[1];
+    if (a[1]<50) a[1] += g;
+    q.style.top = `${a[0]}px`;
+    if (af[1] <= 0) {
+      upperBorder = true; q.querySelector('circle').setAttribute('fill', 'blue')
+    }
+    else {
+      if (upperBorder) upperBorder = false;
+      if (q.querySelector('circle').getAttribute('fill') === "blue") q.querySelector('circle').setAttribute('fill', 'green');
+    };
+    //if (anyCollision) gOver();
+    //console.log('worksdamnit');
+}
+
+function moveCircs(){
+    Reds.forEach(element => {
+    const wid1 = element.width.baseVal.value;
+    const lef = parseFloat(getComputedStyle(element).left);
+    element.style.left = `${lef - 3}px`;
+    if (lef<= -wid1) element.style.left = `${vWid - wid1}px`;
+  });
+  //console.log('WorksButTheyDonMove');
+}
+
+function colDetect(){
+    af = [parseFloat(q.style.left), parseFloat(q.style.top)]
+    var anyCollision = false;
+    //out1.innerHTML = '';
+  //out1.innerHTML = `Page: (${a[0].toFixed(2)},${a[1].toFixed(2)}), d=${d}`;
+  Reds.forEach(element => {
+    var rad = element.querySelector('circle').r.baseVal.value;
+    b = [parseFloat(element.style.left) + rad, parseFloat(element.style.top) + rad];
+    d = dist(af,b);
+    //element.querySelector('text').textContent = d.toFixed(2);
+    const rsum = rad + q.querySelector('circle').r.baseVal.value;
+    //out1.innerHTML += ' | ';
+    if (d <= rsum) {
+        anyCollision = true;
+      //anyCollision = true;
+      //out1.innerHTML += '!!!';
+      //console.log(out1.innerHTML);
+    } /*else {
+      //out1.innerHTML += d.toFixed(2);
+        
+    }*/
+    
+    // Update blue circle to last red circle’s position or refine logic if needed
+    /*mark.style.left = af[0] + 'px';
+    mark.style.top = af[1] + 'px';*/
+    //out1.innerHTML += ['FTS', d.toFixed(2), rsum].join(' | ') + '#';
+  });
+
+  // Change color once based on any collision
+  if (anyCollision || af[1] >= vHei - q.height.baseVal.value) {
+    q.querySelector('circle').setAttribute('fill', 'yellow');
+    gOver();
+  } else {
+    q.querySelector('circle').setAttribute('fill', 'green');
+  }
+}
+
+function dist([x1,y1],[x2,y2]){
+    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+}
+
+function CreateCirc() {
+    var clonedElement = document.getElementsByClassName('RedCirc')[0].cloneNode(true);
+    clonedElement.style.position = 'absolute';
+    var randSize = rdint(10, 300);
+    clonedElement.setAttributes({
+        'width': `${randSize}px`,
+        'height': `${randSize}px`,
+        'visibility': 'visible'
+    });
+    clonedElement.querySelector('circle').setAttributes({
+        'cx': randSize/2,
+        'cy': randSize/2,
+        'r': (randSize/2)-1,
+        'fill': `rgb(${rdint(0,255)},${rdint(0,255)},${rdint(0,255)})`
+    });
+    clonedElement.style.left = vWid
+    clonedElement.style.top = `${rdint(0+randSize, vHei-randSize)}px`;
+    Reds.push(clonedElement);
+    document.body.appendChild(clonedElement);
+}
+
+/*function moveOnInteract(e) {
+    e.preventDefault();
+    if (isAndroid) {
+    a[0] = e.touches[0].pageX - q.width.baseVal.value/4;
+    a[1] = e.touches[0].pageY + q.height.baseVal.value*2;} else {
+        a[0] = e.pageX;
+        a[1] = e.pageY;
+        out1.innerHTML = `Page: (${a[0].toFixed(2)},${a[1].toFixed(2)}), d=${d}`;
+    }
+    q.style.left = `${a[0]}px`;
+    q.style.top = `${a[1]}px`;
+}*/
+
+function gOver() {
+    Reds.forEach(element => element.remove());
+    document.querySelectorAll('.RedCirc').forEach(el => el.remove());
+    intervalId.forEach(id => id && clearInterval(id));
+    document.getElementById('gover').style.display = 'block';
+
+}
+
+</script>
+
 </body>
 
 </html>
-<!-- src="myScript.js"m-->

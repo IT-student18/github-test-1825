@@ -163,7 +163,7 @@ function start() {
 }
 
 function doTilPause(func) {
-  if (!Pause) func();
+  if (!Pause) return func();
 }
 
 function setPos(){

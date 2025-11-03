@@ -61,12 +61,30 @@ body * {
     background-color: rgba(255, 255, 0, 0.5);
     z-index: 10;
 }
+
+#Pause {
+    font-size:100px;
+    color: rgb(34, 34, 34);
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    margin: 0px;
+    width:100vw;
+    height:100vh;
+    /*left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);*/
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    transform: translateY(-50%);
+}
 </style>
 </head>
 
 <body class="mt">
 <h1 id="gover">Opps, You messed up!<br><a href="./flappy-bird-clone(working-prototype).html">Restart</a></h1>
 <br>
+<h1 id="Pause">Pause...</h1>
 <h2 id="o1" style="display:block;">noneYet</h2>
 <svg width="58" height="58" id="MainCirc">
   <circle cx="29" cy="29" r="28" stroke="black" stroke-width="2" fill="green" />
@@ -114,6 +132,7 @@ const q = document.getElementById('MainCirc');
 let mark = document.getElementById('smallCirc');
 const out1 = document.getElementById('o1');
 const gg = document.getElementById('gover');
+const ps = document.getElementById('Pause');
 const Reds = [];
 
 start();
@@ -125,11 +144,11 @@ document.addEventListener("touchstart", moveOnInteract);
     document.addEventListener("mousemove", moveOnInteract);
 };*/
 //!!!!
-Element.prototype.setAttributes = function(attrs) {
+function setAttributes(element, attrs) {
   for (let key in attrs) {
-    this.setAttribute(key, attrs[key]);
+    element.setAttribute(key, attrs[key]);
   }
-};
+}
 //!!!!
 function rdint(min, max) {
   const rand = Math.pow(Math.random(), 2);
@@ -144,17 +163,25 @@ function start() {
     gg.style.display = 'none';
     mark.style.display = 'none';
     out1.style.display = 'none';
+    ps.style.display = 'none';
     upperBorder = Pause = false;
     //anyCollision = false;
-    intervalId[0] = setInterval(doTilPause(colDetect), 1);
-    intervalId[1] = setInterval(doTilPause(fall), s[0]);
-    intervalId[2] = setInterval(doTilPause(CreateCirc), s[3]);
-    intervalId[4] = setInterval(doTilPause(moveCircs), s[2]);
+    intervalId[0] = setInterval(() => doTilPause(colDetect), 1);
+    intervalId[1] = setInterval(() => doTilPause(fall), s[0]);
+    intervalId[2] = setInterval(() => doTilPause(CreateCirc), s[3]);
+    intervalId[4] = setInterval(() => doTilPause(moveCircs), s[2]);
     setPos();
     if (isAndroid) {
       document.addEventListener('touchstart', () => {if (!upperBorder) a[1] = -s[1]});
     } else {
       document.addEventListener('keydown', (e) => {if ((e.code === 'Space') && (!upperBorder)) a[1] = -s[1]});
+      document.addEventListener('keydown', (e) => {if (e.code === 'Escape') {
+        Pause = !Pause;
+        if ((document.getElementById('Pause').style.display == "none") && (gg.style.display == "none")) {
+          document.getElementById('Pause').style.display = "block"
+        } else document.getElementById('Pause').style.display = "none";
+      }
+      });
     }
     // document.addEventListener('pointerup', () => {a[1] = -20;
     // //Reds[0].style.left = `${parseFloat(getComputedStyle(Reds[0]).left)-1}px`;});
@@ -163,9 +190,10 @@ function start() {
 }
 
 function doTilPause(func) {
-  if (!Pause) return func();
+  if (!Pause) {
+    return func();
+  }
 }
-
 function setPos(){
     q.style.top = `${q.height.baseVal.value}px`;
     q.style.left = '100px';
@@ -193,7 +221,7 @@ function moveCircs(){
     element.style.left = `${lef - 3}px`;
     if (lef<= -wid1) element.style.left = `${vWid - wid1}px`;
   });
-  //console.log('WorksButTheyDonMove');
+  console.log('WorksButTheyDonMove');
 }
 
 function colDetect(){
@@ -241,12 +269,12 @@ function CreateCirc() {
     var clonedElement = document.getElementsByClassName('RedCirc')[0].cloneNode(true);
     clonedElement.style.position = 'absolute';
     var randSize = rdint(10, 300);
-    clonedElement.setAttributes({
+    setAttributes(clonedElement, {
         'width': `${randSize}px`,
         'height': `${randSize}px`,
         'visibility': 'visible'
     });
-    clonedElement.querySelector('circle').setAttributes({
+    setAttributes(clonedElement.querySelector('circle'), {
         'cx': randSize/2,
         'cy': randSize/2,
         'r': (randSize/2)-1,
@@ -275,7 +303,7 @@ function gOver() {
     Reds.forEach(element => element.remove());
     document.querySelectorAll('.RedCirc').forEach(el => el.remove());
     intervalId.forEach(id => id && clearInterval(id));
-    document.getElementById('gover').style.display = 'block';
+    gg.style.display = 'block';
 
 }
 
